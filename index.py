@@ -34,6 +34,10 @@ db = SQLAlchemy(app)
 
 from routes import * 
 
+# Create all tables
+with app.app_context():
+    db.create_all()
+
 # Development server execution
 if __name__ == '__main__':
     app.run(
