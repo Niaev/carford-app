@@ -3,6 +3,12 @@
 # Project general imports
 from index import app
 
+@app.get('/app')
+def index():
+    """Health check and index page"""
+
+    return None
+
 @app.get('/app/signup')
 def signup_page():
     """Display sign up page"""
