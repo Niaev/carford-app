@@ -1,0 +1,42 @@
+services:
+  db:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+      POSTGRES_DB: carford
+    volumes:
+      - ./.db:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - my-network
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d postgres" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  web: 
+    build:
+      context: .
+    ports: 
+      - '8080:8080'
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8080
+      - DEBUG_MODE=1
+      - FLASK_SECRET=something_something_something
+      - SGDB=postgresql+psycopg
+      - DB_HOST=localhost
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - DB_SCHEMA=carford
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
