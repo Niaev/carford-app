@@ -8,7 +8,7 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
 # Environment variables
-from config import FLASK_SECRET, SA_DB_URI, HOST, PORT, DEBUG
+from config import FLASK_SECRET, SA_DB_URI, HOST, PORT, DEBUG_MODE
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -43,5 +43,5 @@ if __name__ == '__main__':
     app.run(
         host=HOST,
         port=PORT,
-        debug=DEBUG
+        debug=DEBUG_MODE
     )
