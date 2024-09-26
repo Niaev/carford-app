@@ -1,0 +1,12 @@
+@baseUrl = http://localhost
+@port = 8080
+
+POST {{baseUrl}}:{{port}}/users/login
+Content-Type: application/json
+
+{
+    "email": "tiago@carford.com",
+    "password": "ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae"
+}
+
+###

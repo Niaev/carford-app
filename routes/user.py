@@ -11,7 +11,7 @@ from index import app, db
 from services.UserService import UserService
 
 # Form validation imports
-from utils.form_validators import SignUpForm
+from utils.form_validators import SignUpForm, LoginForm
 
 @app.post('/users/signup')
 def user_signup():
@@ -51,7 +51,32 @@ def user_signup():
 def user_login():
     """Log In user"""
 
-    return None
+    # Get form from request payload
+    form = LoginForm()
+
+    # Validate form
+    if not form.validate_on_submit():
+        return {
+            'message': 'Provide all requred information',
+            'missing': form.errors
+        }, 400
+
+    # Get data from form
+    user_data = {
+        'email': form.email.data,
+        'pwd': form.password.data
+    }
+    
+    service = UserService(db)
+    try:
+        response_json, response_status = service.auth_user(**user_data)
+    except Exception as e:
+        return {
+            'message': 'There was an internal server error',
+            'error': repr(e)
+        }, 500
+
+    return response_json, response_status
 
 @app.post('/users/logout')
 def user_logout():
