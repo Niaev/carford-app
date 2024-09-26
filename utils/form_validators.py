@@ -45,3 +45,24 @@ class LoginForm(FlaskForm):
         validators.Length(min=64, max=64)]
     )
     login = SubmitField('Log in')
+
+class CreateOwnerForm(FlaskForm):
+    class Meta:
+        csrf = False
+
+    name = StringField(
+        'Name',
+        [validators.DataRequired(),
+         validators.Length(min=1, max=50)]
+    )
+    email = EmailField(
+        'E-mail',
+        [validators.DataRequired(),
+        validators.Length(min=6, max=50)]
+    )
+    phone = EmailField(
+        'Telephone',
+        [validators.DataRequired(),
+        validators.Length(min=6, max=50)]
+    )
+    create_owner = SubmitField('Create Owner')
