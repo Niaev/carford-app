@@ -99,3 +99,21 @@ class OwnerService:
         return {
             'message': 'Owner successfully updated'
         }, 200
+
+    def delete_owner(self, oid: int):
+        """Delete existing owner"""
+
+        # Check if owner exists
+        owner = Owners.query.filter_by(id=oid).first()
+        if not owner:
+            return {
+                'message': 'Given owner id doesn\'t exist'
+            }, 400
+
+        # Delete owner
+        self.db.session.delete(owner)
+        self.db.session.commit()
+    
+        return {
+            'message': 'Owner successfully deleted'
+        }, 200

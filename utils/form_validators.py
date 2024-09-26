@@ -91,3 +91,12 @@ class UpdateOwnerForm(FlaskForm):
         validators.Length(min=6, max=50)]
     )
     update_owner = SubmitField('Update Owner')
+
+class DeleteOwnerForm(FlaskForm):
+    class Meta:
+        csrf = False
+
+    id = DecimalField(
+        'ID',
+        [validators.DataRequired()]
+    )
