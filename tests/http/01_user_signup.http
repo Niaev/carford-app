@@ -1,0 +1,15 @@
+@baseUrl = http://localhost
+@port = 8080
+
+POST {{baseUrl}}:{{port}}/users/signup
+Content-Type: application/json
+
+{
+    "name": "Anderson",
+    "email": "anderson@carford.com",
+    "password": "a248d958573f5b710bfa762512f6bfb7f6e8aa7c42e69296f7e5843ef6ce197e",
+    "confirm_password": "a248d958573f5b710bfa762512f6bfb7f6e8aa7c42e69296f7e5843ef6ce197e",
+    "created_at": "2024-09-26"
+}
+
+###

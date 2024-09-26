@@ -3,6 +3,12 @@
 # Project general imports
 from index import app
 
+@app.get('/app')
+def index():
+    """Health check and index page"""
+
+    return None
+
 @app.get('/app/signup')
 def signup_page():
     """Display sign up page"""
@@ -15,21 +21,21 @@ def login_page():
     
     return None
 
-@app.get('/app/users')
-def show_users_page():
-    """Display all users page"""
+@app.get('/app/owners')
+def show_owners_page():
+    """Display all owner page"""
 
     return None
 
-@app.get('/app/user/create')
-def create_user_page():
-    """Display user creation form"""
+@app.get('/app/owner/create')
+def create_owner_page():
+    """Display owner creation form"""
 
     return None
 
-@app.get('/app/user/update/<int:id>')
-def update_user_page(id:int):
-    """Display user creation form"""
+@app.get('/app/owner/update/<int:id>')
+def update_owner_page(id:int):
+    """Display owner creation form"""
 
     return None
 
