@@ -1,0 +1,12 @@
+@baseUrl = http://localhost
+@port = 8080
+
+GET {{baseUrl}}:{{port}}/cars
+Content-Type: application/json
+Cookie: session=eyJsb2dnZWQiOiJ0aWFnb0BjYXJmb3JkLmNvbSJ9.ZvWxHQ.5xsPF_6OAA9ECrppksw7u_RGlnc
+
+###
+
+GET {{baseUrl}}:{{port}}/cars/1
+Content-Type: application/json
+Cookie: session=eyJsb2dnZWQiOiJ0aWFnb0BjYXJmb3JkLmNvbSJ9.ZvWxHQ.5xsPF_6OAA9ECrppksw7u_RGlnc
