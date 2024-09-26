@@ -11,7 +11,7 @@ from index import app, db
 from services.OwnerService import OwnerService
 
 # Form validation imports
-from utils.form_validators import CreateOwnerForm
+from utils.form_validators import CreateOwnerForm, UpdateOwnerForm
 
 @app.post('/owners/create')
 def owner_create():
@@ -57,7 +57,41 @@ def owner_create():
 def owner_update():
     """Update existing owner"""
 
-    return None
+    # Check user session
+    if not 'logged' in session or session['logged'] == '':
+        return {
+            'message': 'Login first to access this function'
+        }, 403
+
+    # Get form from request payload
+    form = UpdateOwnerForm()
+
+    # Validate form
+    if not form.validate_on_submit():
+        return {
+            'message': 'Provide all requred information',
+            'missing': form.errors
+        }, 400
+
+    # Get data from form
+    owner_data = {
+        'oid': form.id.data,
+        'name': form.name.data,
+        'email': form.email.data,
+        'phone': form.phone.data
+    }
+    
+    # Create owner
+    service = OwnerService(db)
+    try:
+        response_json, response_status = service.update_owner(**owner_data)
+    except Exception as e:
+        return {
+            'message': 'There was an internal server error',
+            'error': repr(e)
+        }, 500
+
+    return response_json, response_status
 
 @app.delete('/owners/delete')
 def owner_delete():

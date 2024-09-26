@@ -77,3 +77,25 @@ class OwnerService:
         return {
             'message': 'Owner successfully created'
         }, 200
+
+    def update_owner(self, oid: int, 
+        name:str, email:str, 
+        phone:str):
+        """Update existing owner"""
+
+        # Check if owner exists
+        owner = Owners.query.filter_by(id=oid).first()
+        if not owner:
+            return {
+                'message': 'Given owner id doesn\'t exist'
+            }, 400
+
+        # Update owner data
+        owner.name = name
+        owner.email = email
+        owner.phone = phone
+        self.db.session.commit()
+
+        return {
+            'message': 'Owner successfully updated'
+        }, 200

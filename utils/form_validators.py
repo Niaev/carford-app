@@ -2,7 +2,7 @@
 
 # Form validation imports
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, EmailField, SubmitField, validators
+from wtforms import StringField, PasswordField, EmailField, SubmitField, validators, DecimalField
 
 class SignUpForm(FlaskForm):
     class Meta:
@@ -66,3 +66,28 @@ class CreateOwnerForm(FlaskForm):
         validators.Length(min=6, max=50)]
     )
     create_owner = SubmitField('Create Owner')
+
+class UpdateOwnerForm(FlaskForm):
+    class Meta:
+        csrf = False
+
+    id = DecimalField(
+        'ID',
+        [validators.DataRequired()]
+    )
+    name = StringField(
+        'Name',
+        [validators.DataRequired(),
+         validators.Length(min=1, max=50)]
+    )
+    email = EmailField(
+        'E-mail',
+        [validators.DataRequired(),
+        validators.Length(min=6, max=50)]
+    )
+    phone = EmailField(
+        'Telephone',
+        [validators.DataRequired(),
+        validators.Length(min=6, max=50)]
+    )
+    update_owner = SubmitField('Update Owner')

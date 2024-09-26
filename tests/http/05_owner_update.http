@@ -1,0 +1,15 @@
+@baseUrl = http://localhost
+@port = 8080
+
+PUT {{baseUrl}}:{{port}}/owners/update
+Content-Type: application/json
+Cookie: session=eyJsb2dnZWQiOiJ0aWFnb0BjYXJmb3JkLmNvbSJ9.ZvWxHQ.5xsPF_6OAA9ECrppksw7u_RGlnc
+
+{
+    "id": 1,
+    "name": "Fulano Silva",
+    "email": "fulano.silva@gmail.com",
+    "phone": "+55 99 9999-9999"
+}
+
+###
