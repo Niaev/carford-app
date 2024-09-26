@@ -68,7 +68,7 @@ class CarService:
     def create_car(self, oid:int, 
         color:str, model:str, 
         created_at:str):
-        """Create new owner"""
+        """Create new car"""
 
         # Check if owner exists
         owner = Owners.query.filter_by(id=oid).first()
@@ -79,7 +79,7 @@ class CarService:
 
         # Check number of cars of this owner
         owner_cars = Cars.query.filter_by(owner_id=oid)
-        if owner_cars.count() == 3:
+        if owner_cars.count() >= 3:
             return {
                 'message': f'Given owner already has 3 (three) cars'
             }, 400
@@ -96,4 +96,43 @@ class CarService:
 
         return {
             'message': 'Car successfully created'
+        }, 200
+    
+    def update_car(self, cid:int, 
+        oid:int, color:str, 
+        model:str):
+        """Update existing car"""
+
+        # Check if car exists
+        car = Cars.query.filter_by(id=cid).first()
+        if not car:
+            return {
+                'message': 'Given car id doesn\'t exist'
+            }, 400
+
+        # Check if owner exists
+        owner = Owners.query.filter_by(id=oid).first()
+        if not owner:
+            return {
+                'message': f'Given owner id doesn\'t exist'
+            }, 400
+
+        # Check if car owner is the same as the given id
+        if car.owner_id != owner.id:
+            # If its a different owner
+            # Check number of cars of this owner
+            owner_cars = Cars.query.filter_by(owner_id=oid)
+            if owner_cars.count() >= 3:
+                return {
+                    'message': f'Given owner already has 3 (three) cars'
+                }, 400
+
+        # Update car data
+        car.owner_id = oid
+        car.color = color
+        car.model = model
+        self.db.session.commit()
+
+        return {
+            'message': 'Car successfully updated'
         }, 200

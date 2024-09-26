@@ -154,3 +154,27 @@ class CreateCarForm(FlaskForm):
         validators.Length(max=50)]
     )
     create_car = SubmitField('Create Car')
+
+class UpdateCarForm(FlaskForm):
+    class Meta:
+        csrf = False
+
+    id = DecimalField(
+        'ID',
+        [validators.DataRequired()]
+    )
+    owner_id = DecimalField(
+        'Owner ID',
+        [validators.DataRequired()]
+    )
+    color = StringField(
+        'Color',
+        [validators.DataRequired(),
+        validators.Length(max=50)]
+    )
+    model = StringField(
+        'Model',
+        [validators.DataRequired(),
+        validators.Length(max=50)]
+    )
+    update_car = SubmitField('Update Car')
