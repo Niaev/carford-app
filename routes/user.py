@@ -36,6 +36,7 @@ def user_signup():
         'created_at': datetime.now().strftime('%Y-%m-%d')
     }
     
+    # Create user
     service = UserService(db)
     try:
         response_json, response_status = service.create_user(**user_data)
@@ -67,6 +68,7 @@ def user_login():
         'pwd': form.password.data
     }
     
+    # Login user
     service = UserService(db)
     try:
         response_json, response_status = service.auth_user(**user_data)
@@ -82,6 +84,7 @@ def user_login():
 def user_logout():
     """Log Out current user"""
 
+    # Clear flask session
     session.clear()
     session.modified = True
 

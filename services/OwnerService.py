@@ -9,6 +9,26 @@ class OwnerService:
     def __init__(self, db):
         self.db = db
 
+    def get_owners(self):
+        """Get all registered owners"""
+
+        owners = Owners.query.order_by(Owners.id).all()
+
+        owners_json = []
+        for owner in owners:
+            owners_json.append({
+                'id': owner.id,
+                'name': owner.name,
+                'email': owner.email,
+                'phone': owner.phone,
+                'created_at': owner.created_at
+            })
+
+        return {
+            'message': 'Owners successfully gathered',
+            'owners': owners_json
+        }, 200
+
     def create_owner(self, name:str, 
         email:str, phone:str, 
         created_at:str):

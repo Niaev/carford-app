@@ -17,6 +17,7 @@ from utils.form_validators import CreateOwnerForm
 def owner_create():
     """Create new owner"""
 
+    # Check user session
     if not 'logged' in session or session['logged'] == '':
         return {
             'message': 'Login first to access this function'
@@ -40,6 +41,7 @@ def owner_create():
         'created_at': datetime.now().strftime('%Y-%m-%d')
     }
     
+    # Create owner
     service = OwnerService(db)
     try:
         response_json, response_status = service.create_owner(**owner_data)
@@ -67,7 +69,23 @@ def owner_delete():
 def get_all_owners():
     """Gather all owners"""
 
-    return None
+    # Check user session
+    if not 'logged' in session or session['logged'] == '':
+        return {
+            'message': 'Login first to access this function'
+        }, 403
+
+    # Create owner
+    service = OwnerService(db)
+    try:
+        response_json, response_status = service.get_owners()
+    except Exception as e:
+        return {
+            'message': 'There was an internal server error',
+            'error': repr(e)
+        }, 500
+
+    return response_json, response_status
 
 @app.get('/owners/<int:id>')
 def get_one_owner(id:int):
