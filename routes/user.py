@@ -4,7 +4,7 @@
 from datetime import datetime
 
 # Web development imports
-from flask import request, session
+from flask import session
 
 # Project general imports
 from index import app, db
