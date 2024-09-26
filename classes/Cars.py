@@ -10,7 +10,7 @@ class Cars(db.Model):
     __tablename__ = 'tbl_cars'
     id = db.Column('car_id', db.Integer(), primary_key=True, nullable=False, autoincrement=True, )
     color = db.Column('car_color', db.String(50), nullable=False)
-    model = db.Column('car_model', db.String(50), nullable=False, unique=True)
+    model = db.Column('car_model', db.String(50), nullable=False)
     created_at = db.Column('car_created_at', db.String(50))
 
     owner_id = db.Column('car_own_id', db.Integer(), db.ForeignKey(Owners.id), nullable=False)
