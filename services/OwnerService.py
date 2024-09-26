@@ -12,8 +12,10 @@ class OwnerService:
     def get_owners(self):
         """Get all registered owners"""
 
+        # Get all owners ordered by id
         owners = Owners.query.order_by(Owners.id).all()
 
+        # Transform all owner objects in json format
         owners_json = []
         for owner in owners:
             owners_json.append({
@@ -27,6 +29,27 @@ class OwnerService:
         return {
             'message': 'Owners successfully gathered',
             'owners': owners_json
+        }, 200
+
+    def get_owner(self, oid:int):
+        """Get one single registered owner by its id"""
+
+        # Get single owner by id
+        owner = Owners.query.filter_by(id=oid).first()
+        if not owner:
+            return {
+                'message': 'Given owner id doesn\'t exist'
+            }, 400
+
+        return {
+            'message': 'Single owner successfully gathered',
+            'owner': {
+                'id': owner.id,
+                'name': owner.name,
+                'email': owner.email,
+                'phone': owner.phone,
+                'created_at': owner.created_at
+            }
         }, 200
 
     def create_owner(self, name:str, 

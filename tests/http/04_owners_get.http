@@ -6,3 +6,7 @@ Content-Type: application/json
 Cookie: session=eyJsb2dnZWQiOiJ0aWFnb0BjYXJmb3JkLmNvbSJ9.ZvWxHQ.5xsPF_6OAA9ECrppksw7u_RGlnc
 
 ###
+
+GET {{baseUrl}}:{{port}}/owners/1
+Content-Type: application/json
+Cookie: session=eyJsb2dnZWQiOiJ0aWFnb0BjYXJmb3JkLmNvbSJ9.ZvWxHQ.5xsPF_6OAA9ECrppksw7u_RGlnc

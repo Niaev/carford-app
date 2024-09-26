@@ -87,8 +87,24 @@ def get_all_owners():
 
     return response_json, response_status
 
-@app.get('/owners/<int:id>')
-def get_one_owner(id:int):
+@app.get('/owners/<int:oid>')
+def get_one_owner(oid:int):
     """Gather one owner data"""
 
-    return None
+    # Check user session
+    if not 'logged' in session or session['logged'] == '':
+        return {
+            'message': 'Login first to access this function'
+        }, 403
+
+    # Create owner
+    service = OwnerService(db)
+    try:
+        response_json, response_status = service.get_owner(oid=oid)
+    except Exception as e:
+        return {
+            'message': 'There was an internal server error',
+            'error': repr(e)
+        }, 500
+
+    return response_json, response_status
