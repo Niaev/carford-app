@@ -5,6 +5,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, EmailField, SubmitField, validators
 
 class SignUpForm(FlaskForm):
+    class Meta:
+        csrf = False
+
     name = StringField(
         'Name',
         [validators.DataRequired(),
@@ -28,6 +31,9 @@ class SignUpForm(FlaskForm):
     signup = SubmitField('Sign Up')
 
 class LoginForm(FlaskForm):
+    class Meta:
+        csrf = False
+
     email = EmailField(
         'E-mail',
         [validators.DataRequired(),
