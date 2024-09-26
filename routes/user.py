@@ -4,7 +4,7 @@
 from datetime import datetime
 
 # Web development imports
-from flask import request
+from flask import request, session
 
 # Project general imports
 from index import app, db
@@ -82,4 +82,9 @@ def user_login():
 def user_logout():
     """Log Out current user"""
 
-    return None
+    session.clear()
+    session.modified = True
+
+    return {
+        'message': 'Successfully logged out'
+    }, 200

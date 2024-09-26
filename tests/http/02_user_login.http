@@ -10,3 +10,11 @@ Content-Type: application/json
 }
 
 ###
+
+
+POST {{baseUrl}}:{{port}}/users/logout
+Content-Type: application/json
+
+{}
+
+###
