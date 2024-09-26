@@ -94,7 +94,7 @@ class CreateOwnerForm(FlaskForm):
         [validators.DataRequired(),
         validators.Length(min=6, max=50)]
     )
-    phone = EmailField(
+    phone = StringField(
         'Telephone',
         [validators.DataRequired(),
         validators.Length(min=6, max=50)]
@@ -119,7 +119,7 @@ class UpdateOwnerForm(FlaskForm):
         [validators.DataRequired(),
         validators.Length(min=6, max=50)]
     )
-    phone = EmailField(
+    phone = StringField(
         'Telephone',
         [validators.DataRequired(),
         validators.Length(min=6, max=50)]
