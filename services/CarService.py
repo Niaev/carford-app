@@ -2,6 +2,7 @@
 
 # Project general imports
 from classes.Cars import Cars
+from classes.Owners import Owners
 
 class CarService:
     """"""
@@ -62,4 +63,37 @@ class CarService:
                 },
                 'created_at': car.created_at
             }
+        }, 200
+    
+    def create_car(self, oid:int, 
+        color:str, model:str, 
+        created_at:str):
+        """Create new owner"""
+
+        # Check if owner exists
+        owner = Owners.query.filter_by(id=oid).first()
+        if not owner:
+            return {
+                'message': f'Given owner id doesn\'t exist'
+            }, 400
+
+        # Check number of cars of this owner
+        owner_cars = Cars.query.filter_by(owner_id=oid)
+        if owner_cars.count() == 3:
+            return {
+                'message': f'Given owner already has 3 (three) cars'
+            }, 400
+
+        # Create new car
+        new_car = Cars(
+            color=color,
+            model=model,
+            owner_id=oid,
+            created_at=created_at
+        )
+        self.db.session.add(new_car)
+        self.db.session.commit()
+
+        return {
+            'message': 'Car successfully created'
         }, 200

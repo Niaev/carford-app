@@ -4,6 +4,40 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, EmailField, SubmitField, validators, DecimalField
 
+def validate_car_fields(color:str, model:str) -> tuple:
+    """Validate color and model fields from a car"""
+
+    valid_colors = [
+        'yellow',
+        'blue',
+        'gray'
+    ]
+
+    valid_models = [
+        'hatch',
+        'sedan',
+        'convertible'
+    ]
+
+    if color not in valid_colors:
+        return {
+            'message': 'Provide all required information',
+            'missing': {
+                'color': f'Provide a valid color: {valid_colors}'
+            }
+        }, 400
+
+    if model not in valid_models:
+        return {
+            'message': 'Provide all required information',
+            'missing': {
+                'model': f'Provide a valid model: {valid_models}'
+            }
+        }, 400
+
+    # If it is all good
+    return None, None
+
 class SignUpForm(FlaskForm):
     class Meta:
         csrf = False
@@ -100,3 +134,23 @@ class DeleteOwnerForm(FlaskForm):
         'ID',
         [validators.DataRequired()]
     )
+
+class CreateCarForm(FlaskForm):
+    class Meta:
+        csrf = False
+
+    owner_id = DecimalField(
+        'Owner ID',
+        [validators.DataRequired()]
+    )
+    color = StringField(
+        'Color',
+        [validators.DataRequired(),
+        validators.Length(max=50)]
+    )
+    model = StringField(
+        'Model',
+        [validators.DataRequired(),
+        validators.Length(max=50)]
+    )
+    create_car = SubmitField('Create Car')

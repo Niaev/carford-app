@@ -1,0 +1,14 @@
+@baseUrl = http://localhost
+@port = 8080
+
+POST {{baseUrl}}:{{port}}/cars/create
+Content-Type: application/json
+Cookie: session=eyJsb2dnZWQiOiJ0aWFnb0BjYXJmb3JkLmNvbSJ9.ZvWxHQ.5xsPF_6OAA9ECrppksw7u_RGlnc
+
+{
+    "owner_id": 1,
+    "color": "blue",
+    "model": "sedan"
+}
+
+###
