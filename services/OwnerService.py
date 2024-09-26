@@ -2,6 +2,7 @@
 
 # Project general imports
 from classes.Owners import Owners
+from classes.Cars import Cars
 
 class OwnerService:
     """"""
@@ -18,11 +19,15 @@ class OwnerService:
         # Transform all owner objects in json format
         owners_json = []
         for owner in owners:
+            # Get number of cars
+            n_cars = Cars.query.filter_by(owner_id=owner.id).count()
+
             owners_json.append({
                 'id': owner.id,
                 'name': owner.name,
                 'email': owner.email,
                 'phone': owner.phone,
+                'number_of_cars': n_cars,
                 'created_at': owner.created_at
             })
 
@@ -41,6 +46,17 @@ class OwnerService:
                 'message': 'Given owner id doesn\'t exist'
             }, 400
 
+        # Get cars of this owner
+        cars = Cars.query.filter_by(owner_id=oid)
+        cars_json = []
+        for car in cars:
+            cars_json.append({
+                'id': car.id,
+                'color': car.color,
+                'model': car.model,
+                'created_at': car.created_at
+            })
+
         return {
             'message': 'Single owner successfully gathered',
             'owner': {
@@ -48,6 +64,7 @@ class OwnerService:
                 'name': owner.name,
                 'email': owner.email,
                 'phone': owner.phone,
+                'cars': cars_json,
                 'created_at': owner.created_at
             }
         }, 200
