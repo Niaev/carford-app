@@ -1,10 +1,15 @@
 @baseUrl = http://localhost
 @port = 8080
 
-GET {{baseUrl}}:{{port}}/owners
+POST {{baseUrl}}:{{port}}/owners/create
 Content-Type: application/json
 Cookie: session=eyJsb2dnZWQiOiJ0aWFnb0BjYXJmb3JkLmNvbSJ9.ZvWxHQ.5xsPF_6OAA9ECrppksw7u_RGlnc
 
-{}
+{
+    "name": "Fulano",
+    "email": "fulano@gmail.com",
+    "phone": "99 9999-9999",
+    "created_at": "2024-09-26"
+}
 
 ###
