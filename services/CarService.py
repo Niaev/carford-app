@@ -136,3 +136,21 @@ class CarService:
         return {
             'message': 'Car successfully updated'
         }, 200
+
+    def delete_car(self, cid: int):
+        """Delete existing car"""
+
+        # Check if car exists
+        car = Cars.query.filter_by(id=cid).first()
+        if not car:
+            return {
+                'message': 'Given car id doesn\'t exist'
+            }, 400
+
+        # Delete car
+        self.db.session.delete(car)
+        self.db.session.commit()
+    
+        return {
+            'message': 'Car successfully deleted'
+        }, 200

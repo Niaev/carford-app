@@ -178,3 +178,12 @@ class UpdateCarForm(FlaskForm):
         validators.Length(max=50)]
     )
     update_car = SubmitField('Update Car')
+
+class DeleteCarForm(FlaskForm):
+    class Meta:
+        csrf = False
+
+    id = DecimalField(
+        'ID',
+        [validators.DataRequired()]
+    )
