@@ -1,0 +1,28 @@
+{% extends 'base_template.html' %}
+{% block main_content %}
+<div class="container" id="login">
+
+    <h3>Log In</h3>
+
+    <form>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            {{ form.email(class="form-control", id="email", placeholder="E-mail") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="pwd" class="form-label">Password</label>
+            {{ form.password(class="form-control", id="pwd", placeholder="Password") }}
+        </div>
+
+        {{ form.login(class="btn btn-primary", id="btn-login", value="Log in") }}
+    
+    </form>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/sha256.js') }}"></script>
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
+{% endblock %}
