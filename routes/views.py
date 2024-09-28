@@ -53,7 +53,16 @@ def login_page():
 def show_owners_page():
     """Display all owner page"""
 
-    return None
+    # Check user session
+    if not 'logged' in session or session['logged'] == '':
+        return redirect(url_for('login_page'))
+
+    tags = {
+        'title': 'Owners',
+        'owners_active': 'active'
+    }
+
+    return render_template('owners.html', **tags)
 
 @app.get('/app/owner/create')
 def create_owner_page():
@@ -71,7 +80,16 @@ def update_owner_page(id:int):
 def show_cars_page():
     """Display all cars page"""
 
-    return None
+    # Check user session
+    if not 'logged' in session or session['logged'] == '':
+        return redirect(url_for('login_page'))
+
+    tags = {
+        'title': 'Cars',
+        'cars_active': 'active'
+    }
+
+    return render_template('cars.html', **tags)
 
 @app.get('/app/car/create')
 def create_car_page():
