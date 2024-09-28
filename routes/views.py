@@ -10,7 +10,7 @@ from services.OwnerService import OwnerService
 # Form validation imports
 from utils.form_validators import SignUpForm, LoginForm
 from utils.form_validators import CreateOwnerForm, CreateCarForm
-from utils.form_validators import UpdateOwnerForm
+from utils.form_validators import UpdateOwnerForm, UpdateCarForm
 
 @app.get('/app')
 def index():
@@ -130,8 +130,18 @@ def create_car_page():
 
     return render_template('create_car.html', **tags)
 
-@app.get('/app/car/update/<int:id>')
-def update_car_page(id:int):
+@app.get('/app/car/update/<int:cid>')
+def update_car_page(cid:int):
     """Display car creation form"""
 
-    return None
+    # Check user session
+    if not 'logged' in session or session['logged'] == '':
+        return redirect(url_for('login_page'))
+
+    tags = {
+        'title': 'Update Car',
+        'cars_active': 'active',
+        'form': UpdateCarForm()
+    }
+
+    return render_template('update_car.html', **tags)
