@@ -4,10 +4,13 @@
 from flask import session, render_template, redirect, url_for
 
 # Project general imports
-from index import app
+from index import app, db
+from services.OwnerService import OwnerService
 
 # Form validation imports
-from utils.form_validators import SignUpForm, LoginForm, CreateOwnerForm, CreateCarForm
+from utils.form_validators import SignUpForm, LoginForm
+from utils.form_validators import CreateOwnerForm, CreateCarForm
+from utils.form_validators import UpdateOwnerForm
 
 @app.get('/app')
 def index():
@@ -80,11 +83,21 @@ def create_owner_page():
 
     return render_template('create_owner.html', **tags)
 
-@app.get('/app/owner/update/<int:id>')
-def update_owner_page(id:int):
+@app.get('/app/owner/update/<int:oid>')
+def update_owner_page(oid:int):
     """Display owner creation form"""
 
-    return None
+    # Check user session
+    if not 'logged' in session or session['logged'] == '':
+        return redirect(url_for('login_page'))
+
+    tags = {
+        'title': 'Update Owner',
+        'owners_active': 'active',
+        'form': UpdateOwnerForm()
+    }
+
+    return render_template('update_owner.html', **tags)
 
 @app.get('/app/cars')
 def show_cars_page():

@@ -1,0 +1,60 @@
+{% extends 'base_template.html' %}
+{% block main_content %}
+<div class="container" id="owners">
+
+    <a 
+    href="{{ url_for('show_owners_page') }}"
+    class="btn btn-primary" 
+    id="create-car">Return</a>
+
+    <br><br>
+
+    <h3>Update Owner</h3>
+
+    <br>
+
+    <form>
+
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            {{ form.name(class="form-control", id="name", placeholder="Name") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            {{ form.email(class="form-control", id="email", placeholder="E-mail") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Telephone</label>
+            {{ form.phone(class="form-control", id="phone", placeholder="Telephone") }}
+        </div>
+
+        {{ form.update_owner(class="btn btn-primary", id="btn-update", value="Update") }}
+    
+    </form>
+
+    <br>
+
+    <h5>Cars</h5>
+
+    <br>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Color</th>
+                <th scope="col">Model</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/update_owner.js') }}"></script>
+
+{% endblock %}
