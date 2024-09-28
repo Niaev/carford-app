@@ -17,7 +17,7 @@
 
         <div class="mb-3">
             <label for="color" class="form-label">Color</label>
-            <select name="color" id="color" class="form-control">
+            <select name="color" id="color" class="form-select">
                 <option value="gray">Gray</option>
                 <option value="yellow">Yellow</option>
                 <option value="blue">Blue</option>
@@ -26,10 +26,10 @@
 
         <div class="mb-3">
             <label for="model" class="form-label">Model</label>
-            <select name="model" id="model" class="form-control">
+            <select name="model" id="model" class="form-select">
                 <option value="hatch">Hatch</option>
                 <option value="sedan">Sedan</option>
-                <option value="converitble">Convertible</option>
+                <option value="convertible">Convertible</option>
             </select>
         </div>
 
@@ -43,5 +43,7 @@
     </form>
 
 </div>
+
+<script src="{{ url_for('static', filename='js/create_car.js') }}"></script>
 
 {% endblock %}
