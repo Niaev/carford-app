@@ -5,6 +5,7 @@ const name = form.querySelector('#name');
 const email = form.querySelector('#email');
 const phone = form.querySelector('#phone');
 const btn = form.querySelector('#btn-update');
+const deleteBtn = form.querySelector('#btn-delete');
 const table = div.querySelector('.table');
 const tbody = table.querySelector('tbody');
 
@@ -72,6 +73,42 @@ btn.addEventListener('click', async (e) => {
                 phone: phone.value
             })
         });
+    } catch {
+        alert('An error happened');
+        return;
+    }
+
+    const json = await res.json();
+
+    if (res.status != 200) {
+        alert(await json.message);
+        return;
+    }
+
+    window.location = '/app/owners';
+
+});
+
+
+deleteBtn.addEventListener('click', async (e) => {
+
+    e.preventDefault();
+
+    const confirmation = confirm('Are you sure you want to delete this owner?');
+
+    if (!confirmation) return;
+
+    let res;
+    try {
+        res = await fetch('/owners/delete', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: ownerId
+            })
+        })
     } catch {
         alert('An error happened');
         return;
