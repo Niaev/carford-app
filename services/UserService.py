@@ -48,7 +48,7 @@ class UserService:
             'message': 'User successfully created'
         }, 200
 
-    def auth_user(self, email:str, pwd:str):
+    def auth_user(self, email:str, pwd:str, test=False):
         """Authenticate user"""
 
         # Check if user exists
@@ -58,9 +58,10 @@ class UserService:
             check_pwd = check_password_hash(user.pwd, pwd)
             if check_pwd:
                 # Create session
-                session['logged'] = user.email
-                session.new = True
-                session.modified = True
+                if not test:
+                    session['logged'] = user.email
+                    session.new = True
+                    session.modified = True
                 return {
                     'message': 'User successfully logged'
                 }, 200
