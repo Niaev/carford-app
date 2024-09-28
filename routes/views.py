@@ -7,7 +7,7 @@ from flask import session, render_template, redirect, url_for
 from index import app
 
 # Form validation imports
-from utils.form_validators import SignUpForm, LoginForm, CreateOwnerForm
+from utils.form_validators import SignUpForm, LoginForm, CreateOwnerForm, CreateCarForm
 
 @app.get('/app')
 def index():
@@ -105,7 +105,17 @@ def show_cars_page():
 def create_car_page():
     """Display car creation form"""
 
-    return None
+    # Check user session
+    if not 'logged' in session or session['logged'] == '':
+        return redirect(url_for('login_page'))
+
+    tags = {
+        'title': 'Create Car',
+        'cars_active': 'active',
+        'form': CreateCarForm()
+    }
+
+    return render_template('create_car.html', **tags)
 
 @app.get('/app/car/update/<int:id>')
 def update_car_page(id:int):

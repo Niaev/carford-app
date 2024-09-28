@@ -1,0 +1,47 @@
+{% extends 'base_template.html' %}
+{% block main_content %}
+<div class="container" id="cars">
+
+    <a 
+    href="{{ url_for('show_cars_page') }}"
+    class="btn btn-primary" 
+    id="create-car">Return</a>
+
+    <br><br>
+
+    <h3>Create Car</h3>
+
+    <br>
+
+    <form>
+
+        <div class="mb-3">
+            <label for="color" class="form-label">Color</label>
+            <select name="color" id="color" class="form-control">
+                <option value="gray">Gray</option>
+                <option value="yellow">Yellow</option>
+                <option value="blue">Blue</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="model" class="form-label">Model</label>
+            <select name="model" id="model" class="form-control">
+                <option value="hatch">Hatch</option>
+                <option value="sedan">Sedan</option>
+                <option value="converitble">Convertible</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="owner_id" class="form-label">Owner ID</label>
+            {{ form.owner_id(class="form-control", id="owner_id", placeholder="Owner ID") }}
+        </div>
+
+        {{ form.create_car(class="btn btn-primary", id="btn-create", value="Create") }}
+    
+    </form>
+
+</div>
+
+{% endblock %}
