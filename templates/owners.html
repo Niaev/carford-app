@@ -20,27 +20,17 @@
                 <th scope="col">Name</th>
                 <th scope="col">E-mail</th>
                 <th scope="col">Phone</th>
+                <th scope="col">Cars</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>
-                    <a 
-                    href="/app/owner/update/1"
-                    class="btn btn-primary" 
-                    id="create-owner">Update</a>
-                </td>
-            </tr>
         </tbody>
     </table>
 
 </div>
+
+<script src="{{ url_for('static', filename='js/get_owners.js') }}"></script>
 
 {% endblock %}
