@@ -7,7 +7,7 @@ from flask import session, render_template, redirect, url_for
 from index import app
 
 # Form validation imports
-from utils.form_validators import SignUpForm, LoginForm
+from utils.form_validators import SignUpForm, LoginForm, CreateOwnerForm
 
 @app.get('/app')
 def index():
@@ -68,7 +68,17 @@ def show_owners_page():
 def create_owner_page():
     """Display owner creation form"""
 
-    return None
+    # Check user session
+    if not 'logged' in session or session['logged'] == '':
+        return redirect(url_for('login_page'))
+
+    tags = {
+        'title': 'Create Owner',
+        'owners_active': 'active',
+        'form': CreateOwnerForm()
+    }
+
+    return render_template('create_owner.html', **tags)
 
 @app.get('/app/owner/update/<int:id>')
 def update_owner_page(id:int):
