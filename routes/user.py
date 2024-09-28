@@ -81,6 +81,7 @@ def user_login():
     return response_json, response_status
 
 @app.post('/users/logout')
+@app.get('/users/logout')
 def user_logout():
     """Log Out current user"""
 

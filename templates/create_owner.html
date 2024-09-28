@@ -1,0 +1,41 @@
+{% extends 'base_template.html' %}
+{% block main_content %}
+<div class="container" id="owners">
+
+    <a 
+    href="{{ url_for('show_owners_page') }}"
+    class="btn btn-primary" 
+    id="create-car">Return</a>
+
+    <br><br>
+
+    <h3>Create Owner</h3>
+
+    <br>
+
+    <form>
+
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            {{ form.name(class="form-control", id="name", placeholder="Name") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            {{ form.email(class="form-control", id="email", placeholder="E-mail") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Telephone</label>
+            {{ form.phone(class="form-control", id="phone", placeholder="Telephone") }}
+        </div>
+
+        {{ form.create_owner(class="btn btn-primary", id="btn-create", value="Create") }}
+    
+    </form>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/create_owner.js') }}"></script>
+
+{% endblock %}

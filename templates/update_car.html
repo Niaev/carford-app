@@ -1,0 +1,58 @@
+{% extends 'base_template.html' %}
+{% block main_content %}
+<div class="container" id="cars">
+
+    <a 
+    href="{{ url_for('show_cars_page') }}"
+    class="btn btn-primary" 
+    id="create-car">Return</a>
+
+    <br><br>
+
+    <h3>Update Car</h3>
+
+    <br>
+
+    <form>
+
+        <div class="mb-3">
+            <label for="color" class="form-label">Color</label>
+            <select name="color" id="color" class="form-select">
+                <option value="gray">Gray</option>
+                <option value="yellow">Yellow</option>
+                <option value="blue">Blue</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="model" class="form-label">Model</label>
+            <select name="model" id="model" class="form-select">
+                <option value="hatch">Hatch</option>
+                <option value="sedan">Sedan</option>
+                <option value="convertible">Convertible</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="owner_id" class="form-label">Owner ID</label>
+            {{ form.owner_id(class="form-control", id="owner_id", placeholder="Owner ID") }}
+        </div>
+
+        {{ form.update_car(class="btn btn-primary", id="btn-update", value="Update") }}
+
+        <input 
+        class="btn btn-danger" 
+        id="btn-delete" 
+        name="delete_car" 
+        type="submit" 
+        value="Delete">
+    
+    </form>
+
+    <br>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/update_car.js') }}"></script>
+
+{% endblock %}
